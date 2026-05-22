@@ -122,7 +122,7 @@ The frame state is persisted per user. It rolls older turns into a warm summary,
 
 Canonical harness docs live in Builder:
 
-- [Conversation context harness](../spark-intelligence-builder/docs/CONVERSATION_CONTEXT_HARNESS_2026-04-29.md)
+- [Conversation context harness](https://github.com/vibeforge1111/spark-intelligence-builder/blob/main/docs/CONVERSATION_CONTEXT_HARNESS_2026-04-29.md)
 
 Bridge env:
 
