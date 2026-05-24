@@ -60,7 +60,7 @@ async function main(): Promise<void> {
   }
   await runTelegramPollingHealth();
   const detail = await validateRelayRuntime();
-  console.log(`Relay runtime: OK (${detail})`);
+  console.log(`Relay runtime: OK (${detail}). Next: run \`npm run smoke\` to exercise a /ping round-trip, or tail logs with \`npm run logs\`.`);
 }
 
 if (require.main === module) {
