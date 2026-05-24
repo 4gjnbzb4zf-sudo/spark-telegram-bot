@@ -73,7 +73,7 @@ function parseReplayCase(value: unknown, lineNumber: number): NaturalRouteReplay
   const currentMessage = typeof record.currentMessage === 'string' ? record.currentMessage : '';
   const expectedRoute = typeof record.expectedRoute === 'string' ? record.expectedRoute.trim() : '';
   if (!id || !currentMessage || !expectedRoute) {
-    throw new Error(`Replay case line ${lineNumber} needs id, currentMessage, and expectedRoute.`);
+    throw new Error(`Replay case line ${lineNumber} is missing required fields. Add non-empty "id", "currentMessage", and "expectedRoute" string properties to the JSON object on this line, e.g. {"id":"case-1","currentMessage":"hello","expectedRoute":"smalltalk"}.`);
   }
   return record as unknown as NaturalRouteReplayCase;
 }
