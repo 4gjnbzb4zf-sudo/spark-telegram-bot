@@ -38,7 +38,7 @@ export async function runTelegramPollingHealth(): Promise<void> {
 
   const botToken = process.env.BOT_TOKEN?.trim();
   if (!botToken) {
-    throw new Error('BOT_TOKEN is required for Telegram long polling.');
+    throw new Error('BOT_TOKEN is required for Telegram long polling. Create a bot via @BotFather, then run `spark setup --bot-token <token>` or set BOT_TOKEN in your .env file.');
   }
 
   const primer = buildSparkChatSystemPrompt();
