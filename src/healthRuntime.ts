@@ -36,7 +36,7 @@ export async function validateRelayRuntime(
       throw new Error('Telegram polling status is missing');
     }
     if (pollingState !== 'active' && pollingState !== 'disabled_smoke') {
-      throw new Error(`Telegram polling is ${pollingState}`);
+      throw new Error(`Telegram polling is ${pollingState}; expected 'active' or 'disabled_smoke'. Restart the relay (npm run relay) or check BOT_TOKEN and SPARK_PROFILE settings.`);
     }
     const profile = payload.relay?.profile || telegramRelayIdentityFromEnv(env).profile;
     const port = payload.relay?.port || new URL(url).port;
