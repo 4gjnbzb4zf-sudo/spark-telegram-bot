@@ -52,7 +52,7 @@ function stringArrayField(record: Record<string, unknown>, key: string): string[
 function parseLiveNlCommandCase(value: unknown, index: number): LiveNlCommandCase {
   const record = objectValue(value);
   if (!record) {
-    throw new Error(`Live NL case ${index + 1} is not an object.`);
+    throw new Error(`Live NL case ${index + 1} is not an object. Ensure each case is a JSON object like {"id": "...", "suite": "...", "risk": "safe", "prompt": "...", "expectedRoute": "...", "expectedOutcome": "..."}.`);
   }
 
   const turns = stringArrayField(record, 'turns');
