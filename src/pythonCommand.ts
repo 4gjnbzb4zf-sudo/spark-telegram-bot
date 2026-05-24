@@ -12,7 +12,7 @@ function assertSafePythonExecutable(candidate: string): string {
   const resolved = path.resolve(candidate);
   const extension = path.extname(resolved).toLowerCase();
   if (process.platform === 'win32' && WINDOWS_SHELL_EXTENSIONS.has(extension)) {
-    throw new Error(`SPARK_BUILDER_PYTHON cannot point to a shell script: ${resolved}`);
+    throw new Error(`SPARK_BUILDER_PYTHON cannot point to a shell script: ${resolved}. Set SPARK_BUILDER_PYTHON to a Python executable (e.g. C:\\Python311\\python.exe) instead of a .bat/.cmd/.ps1 wrapper.`);
   }
   const stat = statSync(resolved);
   if (!stat.isFile()) {
