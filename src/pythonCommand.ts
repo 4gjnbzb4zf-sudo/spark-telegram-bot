@@ -16,7 +16,7 @@ function assertSafePythonExecutable(candidate: string): string {
   }
   const stat = statSync(resolved);
   if (!stat.isFile()) {
-    throw new Error(`SPARK_BUILDER_PYTHON is not a file: ${resolved}`);
+    throw new Error(`SPARK_BUILDER_PYTHON is not a file: ${resolved}. Set SPARK_BUILDER_PYTHON to the full path of a Python executable (e.g. /usr/bin/python3).`);
   }
   accessSync(resolved, fsConstants.F_OK);
   return resolved;
