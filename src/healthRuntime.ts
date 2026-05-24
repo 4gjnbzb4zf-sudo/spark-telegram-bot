@@ -33,7 +33,7 @@ export async function validateRelayRuntime(
     };
     const pollingState = payload.runtime?.telegramPolling;
     if (!pollingState) {
-      throw new Error('Telegram polling status is missing');
+      throw new Error('Telegram polling status is missing from relay /health response; ensure the relay reports runtime.telegramPolling (expected "active" or "disabled_smoke") and restart the relay.');
     }
     if (pollingState !== 'active' && pollingState !== 'disabled_smoke') {
       throw new Error(`Telegram polling is ${pollingState}`);
