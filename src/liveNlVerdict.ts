@@ -70,7 +70,7 @@ function parseLiveNlCommandCase(value: unknown, index: number): LiveNlCommandCas
     throw new Error(`Live NL case ${index + 1} needs id, suite, prompt or turns, expectedRoute, and expectedOutcome.`);
   }
   if (!['safe', 'mission', 'writes_files', 'external'].includes(parsed.risk)) {
-    throw new Error(`Live NL case ${parsed.id} has unsupported risk ${parsed.risk || 'unknown'}.`);
+    throw new Error(`Live NL case ${parsed.id} has unsupported risk ${parsed.risk || 'unknown'}. Set risk to one of: safe, mission, writes_files, external (for example, risk: "safe").`);
   }
 
   return parsed;
