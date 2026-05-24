@@ -68,7 +68,7 @@ if (require.main === module) {
     try {
       await main();
     } catch (error) {
-      console.error(`Telegram runtime health: FAILED - ${(error as Error).message}`);
+      console.error(`Telegram runtime health: FAILED - ${(error as Error).message}. Start the relay (e.g. "npm run relay") and retry, or run with TEST_BOT_TOKEN set for token-only checks.`);
       process.exit(1);
     }
   })();
