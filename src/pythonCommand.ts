@@ -53,7 +53,7 @@ export function resolvePythonCommand(rawValue?: string, envPath = process.env.PA
   }
 
   if (rawValue) {
-    throw new Error(`SPARK_BUILDER_PYTHON was not found on PATH: ${raw}`);
+    throw new Error(`SPARK_BUILDER_PYTHON was not found on PATH: ${raw}. Install Python 3 and ensure it is on PATH, or set SPARK_BUILDER_PYTHON to an absolute path (e.g. /usr/bin/python3).`);
   }
   return raw;
 }
