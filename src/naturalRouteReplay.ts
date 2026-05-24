@@ -67,7 +67,7 @@ function valueContains(actual: unknown, expected: unknown): boolean {
 function parseReplayCase(value: unknown, lineNumber: number): NaturalRouteReplayCase {
   const record = objectValue(value);
   if (!record) {
-    throw new Error(`Replay case line ${lineNumber} is not an object.`);
+    throw new Error(`Replay case line ${lineNumber} is not an object. Provide a JSON object per line, e.g. {"id":"case-1","currentMessage":"...","expectedRoute":"..."}.`);
   }
   const id = typeof record.id === 'string' ? record.id.trim() : '';
   const currentMessage = typeof record.currentMessage === 'string' ? record.currentMessage : '';
