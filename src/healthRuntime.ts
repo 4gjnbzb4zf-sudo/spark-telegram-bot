@@ -44,7 +44,7 @@ export async function validateRelayRuntime(
     return `${profile}@${port}${payload.pid ? ` pid=${payload.pid}` : ''}${polling}`;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    throw new Error(`Telegram relay runtime is not reachable at ${url}: ${message}`);
+    throw new Error(`Telegram relay runtime is not reachable at ${url}: ${message}. Start the relay (e.g. "npm run relay:start") and confirm it is listening at ${url}, then re-run this health check.`);
   } finally {
     clearTimeout(timeout);
   }
