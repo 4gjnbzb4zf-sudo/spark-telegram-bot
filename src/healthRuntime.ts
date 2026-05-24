@@ -24,7 +24,7 @@ export async function validateRelayRuntime(
   try {
     const response = await fetchImpl(url, { signal: controller.signal });
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error(`HTTP ${response.status} from ${url}; check the relay is running (e.g. "npm run relay") and retry.`);
     }
     const payload = await response.json() as {
       relay?: { profile?: string; port?: number };
