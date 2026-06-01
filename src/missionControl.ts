@@ -1,3 +1,4 @@
+import { positiveIntegerEnv } from './timeoutConfig';
 import { resolveSpawnerUiUrl } from './spawnerUrl';
 
 export interface MissionControlEvent {
@@ -72,7 +73,7 @@ export function buildChipCreateMissionContext(brief: string): ChipCreateMissionC
 
 async function defaultPostJson(url: string, payload: MissionControlEvent): Promise<void> {
   const controller = new AbortController();
-  const timeoutMs = Number.parseInt(process.env.MISSION_CONTROL_POST_TIMEOUT_MS || '1200', 10) || 1200;
+  const timeoutMs = positiveIntegerEnv(process.env, 'MISSION_CONTROL_POST_TIMEOUT_MS', 1200);
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetch(url, {
