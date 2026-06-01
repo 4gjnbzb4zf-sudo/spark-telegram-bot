@@ -240,6 +240,14 @@ function normalizeBucket(value: unknown): BoardEntry[] {
   return Array.isArray(value) ? value as BoardEntry[] : [];
 }
 
+function sortByLastUpdatedDesc(a: BoardEntry, b: BoardEntry): number {
+  const aMs = Date.parse(a.lastUpdated || '');
+  const bMs = Date.parse(b.lastUpdated || '');
+  const aVal = Number.isFinite(aMs) ? aMs : 0;
+  const bVal = Number.isFinite(bMs) ? bMs : 0;
+  return bVal - aVal;
+}
+
 function isFreshRunningEntry(entry: BoardEntry): boolean {
   const ageMs = Date.now() - Date.parse(entry.lastUpdated);
   return !Number.isFinite(ageMs) || ageMs < STALE_RUNNING_MISSION_MS;
@@ -267,7 +275,7 @@ function latestBoardEntry(board: BoardSnapshot): BoardEntry | null {
     ...board.cancelled,
     ...board.created
   ];
-  entries.sort((a, b) => Date.parse(b.lastUpdated || '') - Date.parse(a.lastUpdated || ''));
+  entries.sort(sortByLastUpdatedDesc);
   return entries[0] || null;
 }
 
@@ -278,7 +286,7 @@ function latestFailureEntry(board: BoardSnapshot): BoardEntry | null {
     ...board.completed,
     ...board.created
   ];
-  entries.sort((a, b) => Date.parse(b.lastUpdated || '') - Date.parse(a.lastUpdated || ''));
+  entries.sort(sortByLastUpdatedDesc);
   return entries.find((entry) => entry.status === 'failed' || entry.lastEventType === 'mission_failed') || null;
 }
 
@@ -1802,7 +1810,7 @@ export const spawner = {
     try {
       const board = await fetchBoardSnapshot();
       const completed = [...board.completed]
-        .sort((a, b) => Date.parse(b.lastUpdated || '') - Date.parse(a.lastUpdated || ''));
+        .sort(sortByLastUpdatedDesc);
       const shippedCandidates = completed.filter((entry) => !isOperationalProbeMission(entry));
       const latest = shippedCandidates.find((entry) => projectOpenLinkForEntry(entry)) || shippedCandidates[0];
       if (!latest) {
